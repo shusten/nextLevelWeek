@@ -14,4 +14,11 @@ app.get('/users', (request, response) => {
     ])
 });
 
+app.post('/users', (request, response) => {
+ const user = {
+    name: 'shusten',
+    email: 'diego@rocketseat.com.br'
+ }
+});
+
 app.listen(3333);
