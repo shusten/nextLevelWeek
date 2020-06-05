@@ -17,16 +17,18 @@ class PointsController {
     
          const trx = await knex.transaction();
     
-         const insertedIds = await trx('points').insert({
-             image: 'image-fake',
-             name,
-             email,
-             whatsapp,
-             city,
-             uf,
-             latitude,
-             longitude,
-         });
+         const point = { 
+                image: 'image-fake',
+                name,
+                email,
+                whatsapp,
+                city,
+                uf,
+                latitude,
+                longitude,
+         };
+
+         const insertedIds = await trx('points').insert(point);
          
          const point_id = insertedIds[0];
     
@@ -39,7 +41,10 @@ class PointsController {
     
          await trx('point_items').insert(pointItems);
     
-         return response.json( { success: true });
+         return response.json( { 
+             id: point_id,
+             ...point,
+         });
     
     }
 }
